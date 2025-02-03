@@ -1,0 +1,38 @@
+---
+title: "Regex"
+author: "Rachel Dolson"
+date: "2025-02-03"
+output: html_document
+---
+
+## Importing Data
+
+```{r}
+MData<-read.csv("Measurements.csv")
+```
+
+## Creating a new column
+
+```{r}
+library(dplyr)
+```
+```{r}
+MData<-MData %>% 
+  mutate(Sp = gsub("^(\\w)\\w*\\s","\\1.",Organism))
+head(MData)
+```
+
+## Creating a new dataset
+
+```{r}
+MeasShort<-MData %>% 
+  select(Sp, everything()) %>% 
+  select(-Organism)
+head(data)
+```
+
+## Saving the data set as a new file
+```{r}
+write.csv(MeasShort,'~/Desktop/MeasShort.csv')
+```
+
